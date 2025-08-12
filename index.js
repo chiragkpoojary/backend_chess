@@ -6,7 +6,12 @@ import Close from "./controller/Close.js";
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocketServer({server});
+const wss = new WebSocketServer({server},{
+    cors: {
+        origin: `${process.env.URL}`,
+        methods: ['GET', 'POST'],
+    },
+});
 const games=new Map();
 wss.on("connection",ws=>{
     console.log("client connected");
