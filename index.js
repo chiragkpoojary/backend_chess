@@ -38,6 +38,6 @@ ws.on("error",err => {
     ws.send("welcome to web socket server!");
 })
 const PORT = process.env.PORT || 8000;
-server.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`);
-})
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Listening on http://0.0.0.0:${PORT}`);
+});

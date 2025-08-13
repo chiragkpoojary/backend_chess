@@ -1,7 +1,8 @@
 export default function joinGame(ws, payload, games) {
     const { gameIdInput } = payload; // the ID entered by the joining player
+    console.table(games)
     const game = games.get(gameIdInput);
-
+console.log(game);
     if (!game) {
         ws.send(JSON.stringify({ type: 'error', payload: 'Game not found' }));
         return;

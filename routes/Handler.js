@@ -23,10 +23,10 @@ export default function handler(ws, message, games) {
     }
 
     const { type, payload } = data;
-    const handler = messageHandler[type];
+    const passage = messageHandler[type];
 
-    if (handler) {
-        handler(ws, payload, games);
+    if (passage) {
+        passage(ws, payload, games);
     } else {
         ws.send(JSON.stringify({ type: 'error', payload: 'Unknown message type' }));
     }
