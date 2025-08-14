@@ -1,5 +1,5 @@
 
-function WebRtc_answer(ws, payload, games) {
+export default function WebRtc_answer(ws, payload, games) {
     console.log("hi");
     const { gameId,msg } = payload;
     const game = games.get(gameId);
@@ -9,5 +9,3 @@ function WebRtc_answer(ws, payload, games) {
         }
     });
 }
-
-export default WebRtc_answer;

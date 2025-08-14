@@ -4,14 +4,16 @@ import moves from "../controller/Moves.js";
 import CreateGame from "../controller/CreateGames.js";
 import MoveGame from "../controller/Moves.js";
 import Close from "../controller/Close.js";
-import webrtc_answer from "../controller/WebRtc_answe.js"
-const messageHandler={
-    create_game:CreateGame,
-    join_game:joinGame,
-    move:MoveGame,
-    close:Close,
-    webrtc_answer:webrtc_answer
-}
+import handleWebRTCSignal from "../controller/WebRtc_answe.js"
+const messageHandler = {
+    create_game: CreateGame,
+    join_game: joinGame,
+    move: MoveGame,
+    close: Close,
+    "webrtc-offer": handleWebRTCSignal,
+    "webrtc-answer": handleWebRTCSignal,
+    "webrtc-ice": handleWebRTCSignal,
+};
 
 export default function handler(ws, message, games) {
     let data;

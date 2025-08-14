@@ -47,4 +47,10 @@ console.log(game);
         }));
     });
 
+    if (game.players.length === 2) {
+        game.players.forEach(p => {
+            p.ws.send(JSON.stringify({ type: "start_video" }));
+        });
+    }
+
 }
