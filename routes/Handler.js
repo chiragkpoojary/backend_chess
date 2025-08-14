@@ -10,9 +10,9 @@ const messageHandler = {
     join_game: joinGame,
     move: MoveGame,
     close: Close,
-    "webrtc-offer": handleWebRTCSignal,
-    "webrtc-answer": handleWebRTCSignal,
-    "webrtc-ice": handleWebRTCSignal,
+    webrtc_offer: handleWebRTCSignal,
+    webrtc_answer: handleWebRTCSignal,
+    webrtc_ice: handleWebRTCSignal,
 };
 
 export default function handler(ws, message, games) {
