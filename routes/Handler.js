@@ -19,6 +19,7 @@ export default function handler(ws, message, games) {
     let data;
     try {
         data = JSON.parse(message);
+
     } catch {
         ws.send(JSON.stringify({ type: 'error', payload: 'Invalid JSON' }));
         return;
@@ -28,6 +29,7 @@ export default function handler(ws, message, games) {
     const passage = messageHandler[type];
 
     if (passage) {
+        console.log("payload",payload)
         passage(ws, payload, games);
     } else {
         ws.send(JSON.stringify({ type: 'error', payload: 'Unknown message type' }));

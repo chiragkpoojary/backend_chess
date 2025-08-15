@@ -1,7 +1,7 @@
 export default function joinGame(ws, payload, games) {
-    const { gameIdInput } = payload; // the ID entered by the joining player
+    const { gameId } = payload; // the ID entered by the joining player
     console.table(games)
-    const game = games.get(gameIdInput);
+    const game = games.get(gameId);
 console.log(game);
     if (!game) {
         ws.send(JSON.stringify({ type: 'error', payload: 'Game not found' }));
@@ -15,12 +15,12 @@ console.log(game);
 
 
     game.players.push({ ws, color: 'b' });
-    ws.gameId = gameIdInput;
+    ws.gameId = gameId;
 
 
     ws.send(JSON.stringify({
         type: 'game_joined',
-        payload: { gameId: gameIdInput, color: 'b' }
+        payload: { gameId: gameId, color: 'b' }
     }));
 
     game.players.forEach((p, i) => {
@@ -31,7 +31,7 @@ console.log(game);
         p.ws.send(JSON.stringify({
             type: 'game_start',
             payload: {
-                gameId: gameIdInput,
+                gameId: gameId,
                 color: p.color
             }
         }));

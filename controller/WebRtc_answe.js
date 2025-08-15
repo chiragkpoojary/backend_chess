@@ -1,6 +1,7 @@
 
 export default function WebRtc_answer(ws, payload, games) {
-    console.log("hi");
+    console.log("hi1");
+    console.log("webRTc answer",payload)
     const { gameId,msg } = payload;
     console.log(payload)
     const game = games.get(gameId);
@@ -8,7 +9,7 @@ export default function WebRtc_answer(ws, payload, games) {
     console.log(msg);
     game.players.forEach(player => {
         if (player !== ws && player.readyState === WebSocket.OPEN) {
-            player.send(JSON.stringify("webrtc-offer"));
+            player.send(JSON.stringify(msg));
         }
     });
 }
