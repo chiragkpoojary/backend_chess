@@ -1,7 +1,8 @@
 export default function joinGame(ws, payload, games) {
-    const { gameIdInput } = payload; // the ID entered by the joining player
-    const game = games.get(gameIdInput);
-
+    const { gameId } = payload; // the ID entered by the joining player
+    console.table(games)
+    const game = games.get(gameId);
+console.log(game);
     if (!game) {
         ws.send(JSON.stringify({ type: 'error', payload: 'Game not found' }));
         return;
@@ -14,12 +15,12 @@ export default function joinGame(ws, payload, games) {
 
 
     game.players.push({ ws, color: 'b' });
-    ws.gameId = gameIdInput;
+    ws.gameId = gameId;
 
 
     ws.send(JSON.stringify({
         type: 'game_joined',
-        payload: { gameId: gameIdInput, color: 'b' }
+        payload: { gameId: gameId, color: 'b' }
     }));
 
     game.players.forEach((p, i) => {
@@ -30,7 +31,7 @@ export default function joinGame(ws, payload, games) {
         p.ws.send(JSON.stringify({
             type: 'game_start',
             payload: {
-                gameId: gameIdInput,
+                gameId: gameId,
                 color: p.color
             }
         }));
@@ -45,5 +46,11 @@ export default function joinGame(ws, payload, games) {
             }
         }));
     });
+
+    if (game.players.length === 2) {
+        game.players.forEach(p => {
+            p.ws.send(JSON.stringify({ type: "start_video" }));
+        });
+    }
 
 }
